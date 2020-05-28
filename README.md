@@ -134,12 +134,8 @@ Value: TOKEN_VALUE
 Name: HEROKU_APP_NAME
 Value: shielded-chamber-49557
 ```
-##### 3. Go to workflow file and add the following to as a new job
+##### 3. Go to workflow file and add the following to as a new step
 ```
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
     - name: Deploy to Heroku
     env:
       HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
@@ -166,3 +162,8 @@ vim runtime.txt
 python-3.7.6
 ```
 ##### 6. In the requirements.txt add gunicorn
+##### 7. Add the following to checkout Action job:
+```
+run: |
+      git fetch --prune --unshallow
+```
