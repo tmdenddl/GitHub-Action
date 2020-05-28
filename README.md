@@ -23,6 +23,7 @@ touch app.py
 vim app.py
 
 ## app.py ##
+```
 from flask import Flask
 
 app = Flask(__name__)
@@ -33,7 +34,7 @@ def index():
 
 if __name__ == "__main__":
     app.run()
-
+```
 ## end of app.py ##
 
 ## Make test directory and test file
@@ -44,11 +45,12 @@ touch test_app.py
 vim test_app.py
 
 ## test_app.py ##
+```
 from app import index
 
 def test_index():
     assert index() == "Hello, World!"
-
+```
 ## end of test_app.py ##
 
 ## Set PYTHONPATH so src directory can be referenced
@@ -62,7 +64,8 @@ pytest
 vim .gitignore
 
 ## .gitignore ##
+```
 /myvenv
 __pycache__/
-
+```
 ## end of .gitignore ##
