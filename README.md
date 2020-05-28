@@ -94,3 +94,75 @@ __pycache__/
 ##### 2. Set up "Python application" Workflow
 ##### 3. Then add, 'export PYTHONPATH=src' on the workflow file at 'Test with pytest' stage
 ##### 4. This should successfully run the CI workflow
+
+#### Setting up Heroku
+
+##### 1. Go to Heroku website, make an account
+##### 2. Download Heroku CLI using brew commands
+```
+brew tap heroku/brew && brew install heroku
+```
+
+#### How to deploy the web app to Heroku server
+##### 1. Login to Heroku CLI and create app
+```
+heroku login
+heroku create
+```
+```
+https://shielded-chamber-49557.herokuapp.com/ | https://git.heroku.com/shielded-chamber-49557.git
+```
+##### 2. Push the code to Heroku server
+```
+git push heroku master
+```
+##### 3. We don't want to run push everytime there is a code change in git, use Action to automated the deployment
+
+#### How to use Action to automate the deployment
+
+##### 1. Create a Heroku token by running:
+```
+heroku authorizations:create
+```
+##### 2. Go to Settings > Secrets, then save the token into Secret storage
+```
+Name: HEROKU_API_TOKEN
+Value: TOKEN_VALUE
+```
+##### 3. In the Secret storage, also add HEROKU_APP_NAME
+```
+Name: HEROKU_APP_NAME
+Value: shielded-chamber-49557
+```
+##### 3. Go to workflow file and add the following to as a new job
+```
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy to Heroku
+    env:
+      HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
+      HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+    if: github.ref == 'refs/heads/master' && job.status == 'success'
+    run: |
+      git remote add heroku https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git
+      git push heroku HEAD:master -f
+``` 
+##### 4. Create Procfile in the repository
+```
+vim Procfile
+```
+
+```
+web gunicorn --pythonpath src app:app
+```
+##### 5. Create runtime.txt in the repository
+```
+vim runtime.txt
+```
+
+```
+python-3.7.6
+```
+##### 6. In the requirements.txt add gunicorn
