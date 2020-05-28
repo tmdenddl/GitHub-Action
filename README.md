@@ -93,3 +93,4 @@ __pycache__/
 ##### 1. Go to Actions Tab
 ##### 2. Set up "Python application" Workflow
 ##### 3. Then add, 'export PYTHONPATH=src' on the workflow file at 'Test with pytest' stage
+##### 4. This should successfully run the CI workflow
