@@ -162,8 +162,8 @@ vim runtime.txt
 python-3.7.6
 ```
 ##### 6. In the requirements.txt add gunicorn
-##### 7. Add the following to checkout Action job:
+##### 7. Add the following below the checkout Action job:
 ```
-run: |
-      git fetch --prune --unshallow
+    - run: |
+        git fetch --prune --unshallow
 ```
