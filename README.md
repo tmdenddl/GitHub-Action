@@ -18,6 +18,14 @@ pip install flask pytest
 ```
 pip freeze > requirements.txt
 ```
+#### Change the requirements file
+#### ----requirements.txt---- ####
+```
+flask
+pytest
+```
+#### ------------------------ ####
+
 #### Make src repository
 ```
 mkdir src
@@ -79,3 +87,9 @@ vim .gitignore
 __pycache__/
 ```
 #### ------------------ ####
+
+#### Setting up Actions
+
+##### 1. Go to Actions Tab
+##### 2. Set up "Python application" Workflow
+##### 3. Then add, 'export PYTHONPATH=src' on the workflow file at 'Test with pytest' stage
