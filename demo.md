@@ -28,6 +28,8 @@
     In the src directory, there is a app.py file which just returns "Hello, World!" when we use the app
     In the tests directory, there is test_app.py file which checks if the index returns "Hello, World!"
     Then there are other files which are just requirements and dependencies for the application
+    
+    I have also stored Heroku API_TOKEN and APP_NAME in the secret store of each repository to be referenced by variable in the workflow
 
 ### In this demo, I will be creating a workflow based on the Action for Python application provided in the Marketplace
     Everytime we make a change to the Flask web app and push the code change to the master, we have to run Pytest to check for  any errors. 
