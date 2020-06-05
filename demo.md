@@ -30,6 +30,10 @@
     Then there are other files which are just requirements and dependencies for the application
 
 ### In this demo, I will be creating a workflow based on the Action for Python application provided in the Marketplace
+    Everytime we make a change to the Flask web app and push the code change to the master, we have to run Pytest to check for  any errors. 
+    Once everything has been verified as error free, we need to push the code to Heroku server for deployment
+    This is the CI/CD pipeline for this repository which will be set up by customizing the workflow file
+    
     The workflow will be triggered when the code has been pushed or pull request has been made to the master
 
 ### In the workflow, we will be executing the following tasks:
