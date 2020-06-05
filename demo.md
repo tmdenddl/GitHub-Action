@@ -47,3 +47,21 @@
 
 #### For Continuous Deployment:
     1. Deploy the code to Heroku server, only if the previous tasks were successful
+    
+## 6. What to change in the workflow file?
+        - run: |
+        git fetch --prune --unshallow
+        
+        - name: Test with pytest
+        run: |
+            export PYTHONPATH=src
+            pytest
+            
+        - name: Deploy to Heroku
+          env:
+            HEROKU_API_TOKEN: ${{ secrets.HEROKU_API_TOKEN }}
+            HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+          if: github.ref == 'refs/heads/master' && job.status == 'success'
+          run: |
+            git remote add heroku https://heroku:$HEROKU_API_TOKEN@git.heroku.com/$HEROKU_APP_NAME.git
+            git push heroku HEAD:master -f
